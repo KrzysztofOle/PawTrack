@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+set -eu
+
+# Prefer globally installed west if available.
+if command -v west >/dev/null 2>&1; then
+	exec west "$@"
+fi
+
+# Fallback locations used in common Zephyr setups.
+for candidate in \
+	"${WEST_BIN:-}" \
+	"${HOME}/zephyr_venv/bin/west" \
+	"${HOME}/.local/bin/west"
+do
+	if [ -n "${candidate}" ] && [ -x "${candidate}" ]; then
+		exec "${candidate}" "$@"
+	fi
+done
+
+# Final fallback when west is installed as a Python module.
+if command -v python3 >/dev/null 2>&1 && python3 -c "import west" >/dev/null 2>&1; then
+	exec python3 -m west "$@"
+fi
+
+echo "ERROR: west command not found."
+echo "Set WEST_BIN or install west into ~/zephyr_venv (python3 -m pip install west)."
+exit 127

@@ -23,13 +23,36 @@ This repository now includes a Zephyr-native application layout:
 
 ## Build and flash with west
 
-Use a standard west workspace installation (for example `/Volumes/Extra/zephyrproject`) and set `ZEPHYR_BASE` to that workspace's Zephyr tree.
+Use PawTrack inside a standard west workspace, e.g.:
+
+- Workspace root: `/Volumes/Extra/zephyrproject`
+- App path: `/Volumes/Extra/zephyrproject/apps/PawTrack`
 
 ```sh
-export ZEPHYR_BASE=/Volumes/Extra/zephyrproject/zephyr
-export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
-export ZEPHYR_SDK_INSTALL_DIR=/Volumes/Extra/zephyr-sdk-0.17.4
-
+cd /Volumes/Extra/zephyrproject/apps/PawTrack
 west build -d build -b xiao_mg24 .
 west flash --build-dir build
+```
+
+## Reliable local workflow (recommended)
+
+This repository includes wrappers that remove dependency on a globally available `west` binary:
+
+```sh
+cd /Volumes/Extra/zephyrproject/apps/PawTrack
+./scripts/build.sh
+./scripts/flash.sh
+```
+
+What these scripts do:
+
+- `scripts/westw` finds `west` in `PATH`, `~/zephyr_venv/bin/west`, or `python3 -m west`
+- `scripts/build.sh` builds `xiao_mg24` with sane defaults
+- `scripts/flash.sh` prefers Silicon Labs OpenOCD (Arduino package), then falls back to `west flash`
+
+Optional shell fix for missing `west`:
+
+```sh
+echo 'export PATH="$HOME/zephyr_venv/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
 ```

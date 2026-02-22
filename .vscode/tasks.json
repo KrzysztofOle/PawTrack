@@ -1,32 +1,13 @@
 {
   "version": "2.0.0",
   "options": {
-    "cwd": "${workspaceFolder}",
-    "env": {
-      "ZEPHYR_BASE": "/Volumes/Extra/zephyrproject/zephyr",
-      "ZEPHYR_TOOLCHAIN_VARIANT": "zephyr",
-      "ZEPHYR_SDK_INSTALL_DIR": "/Volumes/Extra/zephyr-sdk-0.17.4",
-      "PATH": "/Volumes/Extra/zephyr-sdk-0.17.4/arm-zephyr-eabi/bin:${env:HOME}/zephyr_venv/bin:${env:PATH}"
-    }
+    "cwd": "${workspaceFolder}"
   },
   "tasks": [
     {
-      "label": "Zephyr: Build (west)",
+      "label": "Zephyr: Build",
       "type": "shell",
-      "command": "west",
-      "args": [
-        "build",
-        "-d",
-        "${workspaceFolder}/build",
-        "-b",
-        "xiao_mg24",
-        "-p",
-        "auto",
-        "${workspaceFolder}",
-        "--",
-        "-DPython3_EXECUTABLE=${env:HOME}/zephyr_venv/bin/python3",
-        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
-      ],
+      "command": "${workspaceFolder}/scripts/build.sh",
       "problemMatcher": [
         "$gcc"
       ],
@@ -36,43 +17,27 @@
       }
     },
     {
-      "label": "Zephyr: Rebuild Pristine (west)",
+      "label": "Zephyr: Rebuild Pristine",
       "type": "shell",
-      "command": "west",
+      "command": "${workspaceFolder}/scripts/build.sh",
       "args": [
-        "build",
-        "-d",
-        "${workspaceFolder}/build",
-        "-b",
-        "xiao_mg24",
-        "-p",
-        "always",
-        "${workspaceFolder}",
-        "--",
-        "-DPython3_EXECUTABLE=${env:HOME}/zephyr_venv/bin/python3",
-        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+        "--pristine"
       ],
       "problemMatcher": [
         "$gcc"
       ]
     },
     {
-      "label": "Zephyr: Flash (auto runner)",
+      "label": "Zephyr: Flash",
       "type": "shell",
-      "command": "west",
-      "args": [
-        "flash",
-        "--build-dir",
-        "${workspaceFolder}/build",
-        "--skip-rebuild"
-      ],
+      "command": "${workspaceFolder}/scripts/flash.sh",
       "problemMatcher": [],
-      "dependsOn": "Zephyr: Build (west)"
+      "dependsOn": "Zephyr: Build"
     },
     {
       "label": "Zephyr: Flash (jlink)",
       "type": "shell",
-      "command": "west",
+      "command": "${workspaceFolder}/scripts/westw",
       "args": [
         "flash",
         "--build-dir",
@@ -82,12 +47,12 @@
         "--skip-rebuild"
       ],
       "problemMatcher": [],
-      "dependsOn": "Zephyr: Build (west)"
+      "dependsOn": "Zephyr: Build"
     },
     {
       "label": "Zephyr: Flash (pyocd)",
       "type": "shell",
-      "command": "west",
+      "command": "${workspaceFolder}/scripts/westw",
       "args": [
         "flash",
         "--build-dir",
@@ -97,7 +62,7 @@
         "--skip-rebuild"
       ],
       "problemMatcher": [],
-      "dependsOn": "Zephyr: Build (west)"
+      "dependsOn": "Zephyr: Build"
     }
   ]
 }

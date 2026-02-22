@@ -1,9 +1,6 @@
 {
   "cmake.configureOnOpen": false,
   "terminal.integrated.env.osx": {
-    "ZEPHYR_BASE": "/Volumes/Extra/zephyrproject/zephyr",
-    "ZEPHYR_TOOLCHAIN_VARIANT": "zephyr",
-    "ZEPHYR_SDK_INSTALL_DIR": "/Volumes/Extra/zephyr-sdk-0.17.4",
     "PATH": "/Volumes/Extra/zephyr-sdk-0.17.4/arm-zephyr-eabi/bin:${env:HOME}/zephyr_venv/bin:${env:PATH}"
   },
 

@@ -1,0 +1,21 @@
+{
+  "cmake.sourceDirectory": "/Users/krzysztof/VSCode/PawTrack",
+  "cmake.buildDirectory": "/Volumes/Extra/zephyrproject/build",
+  "cmake.generator": "Ninja",
+
+  "cmake.configureSettings": {
+    "BOARD": "xiao_mg24",
+    "WEST_PYTHON": "/Users/krzysztof/zephyr_venv/bin/python3"
+  },
+
+  "cmake.environment": {
+    "ZEPHYR_BASE": "/Volumes/Extra/zephyrproject/zephyr",
+    "ZEPHYR_TOOLCHAIN_VARIANT": "zephyr",
+    "ZEPHYR_SDK_INSTALL_DIR": "/Volumes/Extra/zephyr-sdk-0.17.4",
+    "PATH": "/Volumes/Extra/zephyr-sdk-0.17.4/arm-zephyr-eabi/bin:/Users/krzysztof/zephyr_venv/bin:/opt/local/bin:/opt/local/sbin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+  },
+
+  "C_Cpp.default.compilerPath": "/Volumes/Extra/zephyr-sdk-0.17.4/arm-zephyr-eabi/bin/arm-zephyr-eabi-gcc",
+  "C_Cpp.default.intelliSenseMode": "gcc-arm",
+  "C_Cpp.default.compileCommands": "/Volumes/Extra/zephyrproject/build/compile_commands.json"
+}

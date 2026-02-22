@@ -1,0 +1,23 @@
+{
+  "name": "Seeed XIAO MG24 (custom)",
+  "vendor": "Seeed Studio",
+  "url": "https://wiki.seeedstudio.com/XIAO_MG24/",
+
+  "build": {
+    "core": "arduino",
+    "cpu": "cortex-m33",
+    "f_cpu": "78000000L",
+    "mcu": "efr32mg24b220f1536im48",
+    "variant": "EFR32MG24B220F1536IM48"
+  },
+
+  "frameworks": [
+    "arduino"
+  ],
+
+  "upload": {
+    "maximum_ram_size": 262144,
+    "maximum_size": 1572864,
+    "protocol": "cmsis-dap"
+  }
+}

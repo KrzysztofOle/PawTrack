@@ -1,26 +1,7 @@
 {
-  "cmake.sourceDirectory": "${workspaceFolder}",
-  "cmake.buildDirectory": "${workspaceFolder}/build",
-  "cmake.generator": "Ninja",
   "cmake.configureOnOpen": false,
-
-  "cmake.configureSettings": {
-    "BOARD": "xiao_mg24",
-    "WEST_PYTHON": "${env:HOME}/zephyr_venv/bin/python3",
-    "Python3_EXECUTABLE": "${env:HOME}/zephyr_venv/bin/python3",
-    "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
-  },
-
-  "cmake.configureEnvironment": {
+  "terminal.integrated.env.osx": {
     "ZEPHYR_BASE": "/Volumes/Extra/zephyrproject/zephyr",
-    "WEST_CONFIG_LOCAL": "/Volumes/Extra/zephyrproject/.west/config",
-    "ZEPHYR_TOOLCHAIN_VARIANT": "zephyr",
-    "ZEPHYR_SDK_INSTALL_DIR": "/Volumes/Extra/zephyr-sdk-0.17.4",
-    "PATH": "/Volumes/Extra/zephyr-sdk-0.17.4/arm-zephyr-eabi/bin:${env:HOME}/zephyr_venv/bin:${env:PATH}"
-  },
-  "cmake.buildEnvironment": {
-    "ZEPHYR_BASE": "/Volumes/Extra/zephyrproject/zephyr",
-    "WEST_CONFIG_LOCAL": "/Volumes/Extra/zephyrproject/.west/config",
     "ZEPHYR_TOOLCHAIN_VARIANT": "zephyr",
     "ZEPHYR_SDK_INSTALL_DIR": "/Volumes/Extra/zephyr-sdk-0.17.4",
     "PATH": "/Volumes/Extra/zephyr-sdk-0.17.4/arm-zephyr-eabi/bin:${env:HOME}/zephyr_venv/bin:${env:PATH}"

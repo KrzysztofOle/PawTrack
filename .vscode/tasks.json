@@ -1,62 +1,103 @@
 {
   "version": "2.0.0",
+  "options": {
+    "cwd": "${workspaceFolder}",
+    "env": {
+      "ZEPHYR_BASE": "/Volumes/Extra/zephyrproject/zephyr",
+      "ZEPHYR_TOOLCHAIN_VARIANT": "zephyr",
+      "ZEPHYR_SDK_INSTALL_DIR": "/Volumes/Extra/zephyr-sdk-0.17.4",
+      "PATH": "/Volumes/Extra/zephyr-sdk-0.17.4/arm-zephyr-eabi/bin:${env:HOME}/zephyr_venv/bin:${env:PATH}"
+    }
+  },
   "tasks": [
     {
-      "label": "Zephyr: Configure (xiao_mg24)",
+      "label": "Zephyr: Build (west)",
       "type": "shell",
-      "command": "cmake",
+      "command": "west",
       "args": [
-        "-S",
-        "${workspaceFolder}",
-        "-B",
+        "build",
+        "-d",
         "${workspaceFolder}/build",
-        "-GNinja",
-        "-DBOARD=xiao_mg24",
-        "-DWEST_PYTHON=${env:HOME}/zephyr_venv/bin/python3",
+        "-b",
+        "xiao_mg24",
+        "-p",
+        "auto",
+        "${workspaceFolder}",
+        "--",
         "-DPython3_EXECUTABLE=${env:HOME}/zephyr_venv/bin/python3",
-        "-DZEPHYR_BASE=/Volumes/Extra/zephyrproject/zephyr",
-        "-DZEPHYR_TOOLCHAIN_VARIANT=zephyr",
-        "-DZEPHYR_SDK_INSTALL_DIR=/Volumes/Extra/zephyr-sdk-0.17.4",
         "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
       ],
-      "options": {
-        "env": {
-          "ZEPHYR_BASE": "/Volumes/Extra/zephyrproject/zephyr",
-          "WEST_CONFIG_LOCAL": "/Volumes/Extra/zephyrproject/.west/config",
-          "ZEPHYR_TOOLCHAIN_VARIANT": "zephyr",
-          "ZEPHYR_SDK_INSTALL_DIR": "/Volumes/Extra/zephyr-sdk-0.17.4",
-          "PATH": "/Volumes/Extra/zephyr-sdk-0.17.4/arm-zephyr-eabi/bin:${env:HOME}/zephyr_venv/bin:${env:PATH}"
-        }
-      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Zephyr: Rebuild Pristine (west)",
+      "type": "shell",
+      "command": "west",
+      "args": [
+        "build",
+        "-d",
+        "${workspaceFolder}/build",
+        "-b",
+        "xiao_mg24",
+        "-p",
+        "always",
+        "${workspaceFolder}",
+        "--",
+        "-DPython3_EXECUTABLE=${env:HOME}/zephyr_venv/bin/python3",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+      ],
       "problemMatcher": [
         "$gcc"
       ]
     },
     {
-      "label": "Zephyr: Build",
+      "label": "Zephyr: Flash (auto runner)",
       "type": "shell",
-      "command": "cmake",
+      "command": "west",
       "args": [
-        "--build",
-        "${workspaceFolder}/build"
+        "flash",
+        "--build-dir",
+        "${workspaceFolder}/build",
+        "--skip-rebuild"
       ],
-      "options": {
-        "env": {
-          "ZEPHYR_BASE": "/Volumes/Extra/zephyrproject/zephyr",
-          "WEST_CONFIG_LOCAL": "/Volumes/Extra/zephyrproject/.west/config",
-          "ZEPHYR_TOOLCHAIN_VARIANT": "zephyr",
-          "ZEPHYR_SDK_INSTALL_DIR": "/Volumes/Extra/zephyr-sdk-0.17.4",
-          "PATH": "/Volumes/Extra/zephyr-sdk-0.17.4/arm-zephyr-eabi/bin:${env:HOME}/zephyr_venv/bin:${env:PATH}"
-        }
-      },
-      "problemMatcher": [
-        "$gcc"
+      "problemMatcher": [],
+      "dependsOn": "Zephyr: Build (west)"
+    },
+    {
+      "label": "Zephyr: Flash (jlink)",
+      "type": "shell",
+      "command": "west",
+      "args": [
+        "flash",
+        "--build-dir",
+        "${workspaceFolder}/build",
+        "--runner",
+        "jlink",
+        "--skip-rebuild"
       ],
-      "dependsOn": "Zephyr: Configure (xiao_mg24)",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
+      "problemMatcher": [],
+      "dependsOn": "Zephyr: Build (west)"
+    },
+    {
+      "label": "Zephyr: Flash (pyocd)",
+      "type": "shell",
+      "command": "west",
+      "args": [
+        "flash",
+        "--build-dir",
+        "${workspaceFolder}/build",
+        "--runner",
+        "pyocd",
+        "--skip-rebuild"
+      ],
+      "problemMatcher": [],
+      "dependsOn": "Zephyr: Build (west)"
     }
   ]
 }

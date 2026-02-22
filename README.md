@@ -23,11 +23,13 @@ This repository now includes a Zephyr-native application layout:
 
 ## Build and flash with west
 
-Use a Zephyr workspace shell where `west` is installed and `ZEPHYR_BASE` is available.
+Use a standard west workspace installation (for example `/Volumes/Extra/zephyrproject`) and set `ZEPHYR_BASE` to that workspace's Zephyr tree.
 
 ```sh
-west build -b seeed_xiao_mg24 -d build/seeed_xiao_mg24 .
-west flash -d build/seeed_xiao_mg24
-```
+export ZEPHYR_BASE=/Volumes/Extra/zephyrproject/zephyr
+export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
+export ZEPHYR_SDK_INSTALL_DIR=/Volumes/Extra/zephyr-sdk-0.17.4
 
-Note: if your local setup exposes this board as `xiao_mg24`, use that board name in place of `seeed_xiao_mg24`.
+west build -d build -b xiao_mg24 .
+west flash --build-dir build
+```

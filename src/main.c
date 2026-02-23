@@ -13,7 +13,7 @@
 LOG_MODULE_REGISTER(pawtrack_main, LOG_LEVEL_INF);
 
 #define LED0_NODE DT_ALIAS(led0)
-#define STATUS_LED_BLINK_INTERVAL K_MSEC(500)
+#define STATUS_LED_BLINK_INTERVAL K_MSEC(150)
 
 static const struct gpio_dt_spec status_led = GPIO_DT_SPEC_GET_OR(LED0_NODE, gpios, {0});
 static struct k_work_delayable status_led_blink_work;
@@ -94,7 +94,9 @@ static int pawtrack_modules_init(void)
 
 int main(void)
 {
-	printk("Hello World from PawTrack on %s\n", CONFIG_BOARD);
+	printk("===============================================\n");
+	printk(" Hello World from PawTrack on %s\n", CONFIG_BOARD);
+	printk("===============================================\n");
 
 	if (pawtrack_modules_init() != 0) {
 		LOG_ERR("Module initialization failed; staying alive for debug");

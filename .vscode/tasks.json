@@ -7,7 +7,14 @@
     {
       "label": "Zephyr: Build",
       "type": "shell",
-      "command": "${workspaceFolder}/scripts/build.sh",
+      "command": "${workspaceFolder}/scripts/westw",
+      "args": [
+        "build",
+        "-d",
+        "${workspaceFolder}/build",
+        "-b",
+        "xiao_mg24"
+      ],
       "problemMatcher": [
         "$gcc"
       ],
@@ -15,6 +22,14 @@
         "kind": "build",
         "isDefault": true
       }
+    },
+    {
+      "label": "Zephyr: Build (configure if needed)",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/build.sh",
+      "problemMatcher": [
+        "$gcc"
+      ]
     },
     {
       "label": "Zephyr: Rebuild Pristine",
@@ -50,19 +65,18 @@
       "dependsOn": "Zephyr: Build"
     },
     {
-      "label": "Zephyr: Flash (pyocd)",
+      "label": "Zephyr: Monitor",
       "type": "shell",
-      "command": "${workspaceFolder}/scripts/westw",
-      "args": [
-        "flash",
-        "--build-dir",
-        "${workspaceFolder}/build",
-        "--runner",
-        "pyocd",
-        "--skip-rebuild"
+      "command": "${workspaceFolder}/scripts/monitor.sh",
+      "problemMatcher": []
+    },
+    {
+      "label": "Zephyr: Flash + Monitor",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Zephyr: Flash"
       ],
-      "problemMatcher": [],
-      "dependsOn": "Zephyr: Build"
+      "problemMatcher": []
     }
   ]
 }

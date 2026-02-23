@@ -1,0 +1,50 @@
+[
+  {
+    "key": "f13",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Zephyr: Flash",
+    "when": "isMac"
+  },
+  {
+    "key": "cmd+alt+r",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Zephyr: Rebuild Pristine",
+    "when": "isMac"
+  },
+  {
+    "key": "cmd+alt+f",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Zephyr: Flash",
+    "when": "isMac"
+  },
+  {
+    "key": "cmd+alt+j",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Zephyr: Flash (jlink)",
+    "when": "isMac"
+  },
+  {
+    "key": "ctrl+alt+b",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Zephyr: Build",
+    "when": "isLinux || isWindows"
+  },
+  {
+    "key": "ctrl+alt+r",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Zephyr: Rebuild Pristine",
+    "when": "isLinux || isWindows"
+  },
+  {
+    "key": "ctrl+alt+f",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Zephyr: Flash",
+    "when": "isLinux || isWindows"
+  },
+  {
+    "key": "ctrl+alt+j",
+    "command": "workbench.action.tasks.runTask",
+    "args": "Zephyr: Flash (jlink)",
+    "when": "isLinux || isWindows"
+  }
+]

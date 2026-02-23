@@ -42,6 +42,7 @@ This repository includes wrappers that remove dependency on a globally available
 cd /Volumes/Extra/zephyrproject/apps/PawTrack
 ./scripts/build.sh
 ./scripts/flash.sh
+./scripts/monitor.sh
 ```
 
 What these scripts do:
@@ -49,6 +50,7 @@ What these scripts do:
 - `scripts/westw` finds `west` in `PATH`, `~/zephyr_venv/bin/west`, or `python3 -m west`
 - `scripts/build.sh` builds `xiao_mg24` with sane defaults
 - `scripts/flash.sh` prefers Silicon Labs OpenOCD (Arduino package), then falls back to `west flash`
+- `scripts/monitor.sh` auto-detects a serial port and opens a UART monitor (115200 by default)
 
 Optional shell fix for missing `west`:
 
